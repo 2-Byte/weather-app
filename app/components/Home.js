@@ -7,9 +7,7 @@ class LocationInput extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      location: '',
-      city: '',
-      state: ''
+      location: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -17,15 +15,10 @@ class LocationInput extends React.Component {
 
   handleChange (event) {
     var value = event.target.value;
-    var cityState = value.split(',');
-    var city = cityState[0] === undefined ? '' : cityState[0];
-    var state = cityState[1] === undefined ? '' : cityState[1];
 
     this.setState(function () {
       return {
-        location: value,
-        city: city,
-        state: state
+        location: value
       }
     })
   }
@@ -44,7 +37,7 @@ class LocationInput extends React.Component {
         <Link
           to={{
             pathname: '/weather',
-            search: `?city=` + this.state.city + `&state=` + this.state.state
+            search: `?location=` + this.state.location
           }}>
           {this.props.label}
         </Link>
