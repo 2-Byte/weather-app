@@ -22,7 +22,7 @@ function ForecastGrid (props) {
         var dayOfWeek = api.getDayOfWeek(weather.datetime);
         var month = api.getMonth(date[1]);
         var day = date[2];
-        console.log(weather);
+        
         return (
           <div key={weather.ts} className='col-12'>
             <div className='col-4'>

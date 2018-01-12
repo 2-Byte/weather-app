@@ -13,6 +13,7 @@ body {
 
 a {
   text-decoration: none;
+  color: #ffffff;
 }
 
 li {
@@ -21,6 +22,12 @@ li {
 
 svg {
   fill: #ffffff;
+}
+
+input {
+  padding: 12px;
+  border-radius: 6px;
+  margin: 20px;
 }
 
 .raindrop {

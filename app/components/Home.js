@@ -25,7 +25,7 @@ class LocationInput extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='center'>
         <h1>{this.props.prompt}</h1>
         <input
           placeholder={this.props.placeholder}
@@ -33,7 +33,7 @@ class LocationInput extends React.Component {
           autoComplete='off'
           onChange={this.handleChange}
         />
-
+        <br/>
         <Link
           to={{
             pathname: '/weather',
