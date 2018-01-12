@@ -1,7 +1,7 @@
 var axios = require('axios');
 
-var _baseURL = 'http://api.openweathermap.org/data/2.5/';
-var _APIKEY = 'API_KEY_HERE';
+var _weatherURL = 'http://api.weatherbit.io/v2.0/';
+var _weatherAPIKEY = 'API_KEY_HERE';
 
 function prepRouteParams (queryStringData) {
   return Object.keys(queryStringData)
@@ -10,29 +10,46 @@ function prepRouteParams (queryStringData) {
     }).join('&')
 }
 
-function prepUrl (type, queryStringData) {
-  return _baseURL + type + '?' + prepRouteParams(queryStringData);
+function prepUrl (url, type, queryStringData) {
+  return url + type + '?' + prepRouteParams(queryStringData);
 }
 
-function getQueryStringData (location) {
+function getCurrentQueryString (location) {
   return {
-    q: location,
-    type: 'accurate',
-    APPID: _APIKEY,
-    cnt: 5
+    city: location,
+    units: 'I',
+    key: _weatherAPIKEY
   }
 }
 
-function getWeather (location) {
-  var queryStringData = getQueryStringData(location);
-  var url = prepUrl('forecast/daily', queryStringData)
+function getForecastQueryString (location) {
+  return {
+    city: location,
+    days: 6,
+    units: 'I',
+    key: _weatherAPIKEY
+  }
+}
 
-  return axios.get(url)
-    .then(function (weatherData) {
-      return weatherData.data
-    })
+function getCurrentWeather (location) {
+  var currentQueryString = getCurrentQueryString(location);
+  var weatherURL = prepUrl(_weatherURL, 'current', currentQueryString);
+  return axios.get(weatherURL)
+    .then(function (result) {
+      return result.data.data[0];
+    });
+}
+
+function getForecast (location) {
+  var forecastQueryString = getForecastQueryString(location);
+  var weatherURL = prepUrl(_weatherURL, 'forecast/daily', forecastQueryString);
+  return axios.get(weatherURL)
+    .then(function (result) {
+      return result.data.data;
+    });
 }
 
 module.exports = {
-  getWeather: getWeather
+  getCurrentWeather: getCurrentWeather,
+  getForecast: getForecast
 };
