@@ -2,7 +2,8 @@
 
 body {
   background: linear-gradient(to bottom, #734b6d, #FDB99B);
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   color: #ffffff;
   font-family: 'Nunito Sans', sans-serif;
   text-transform: uppercase;
@@ -12,4 +13,32 @@ body {
 
 a {
   text-decoration: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+svg {
+  fill: #ffffff;
+}
+
+.raindrop {
+  width: 13px;
+  height: 13px;
+}
+
+.temperature {
+  font-size: 7vw;
+  line-height: 1.1em;
+}
+
+.justify-text {
+  text-align: justify;
+}
+
+.justify-text::after {
+  content: '';
+  display: inline-block;
+  width: 100%
 }
